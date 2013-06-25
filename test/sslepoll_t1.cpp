@@ -24,7 +24,7 @@ public:
 		int length = m_socket->Recv(buf, 255,0);
         if(length > 0)
         {
-		    printf( "from client: %s\n", buf);
+		    printf( "from client length: %d --: %s\n", length, buf);
 
             long timestamp;
             strcpy(buf,"welcome");
@@ -57,6 +57,12 @@ public:
     TCPConnector *GetConnector(CTcpSocket *ts)
     {
         return new Client((CSslSocket*)ts, m_epollServer);
+    }
+    virtual int InputNotify()
+    {
+        int clifd = SSLListener::InputNotify();
+        printf("clifd: %d\n", clifd);
+        return clifd;
     }
 };
 

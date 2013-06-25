@@ -74,6 +74,7 @@ class TCPConnector:public Epoller
 {
 public:
 	TCPConnector(CTcpSocket *socket, EpollServer *es);
+    ~TCPConnector();
 
 protected:
     CTcpSocket *m_socket;

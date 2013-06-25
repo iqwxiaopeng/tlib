@@ -102,7 +102,11 @@ TCPConnector::TCPConnector(CTcpSocket *socket, EpollServer *es)
 	SetFd(m_socket->GetFd());
     m_epollServer = es;
 	EnableInput();
-	//EnableOutput();
+}
+
+TCPConnector::~TCPConnector()
+{
+    delete m_socket;
 }
 
 

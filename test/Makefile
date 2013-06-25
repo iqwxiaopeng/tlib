@@ -1,8 +1,9 @@
-ALL = server2 client clients  sslserver
+ALL = server1 server2 client clients  sslserver sslclient
 
 
 server1_SRC = epoll_t1.cpp \
-         ../epollobserver.cpp
+         ../epollobserver.cpp \
+         ../csocket.cpp
 
 server2_SRC = epoll_t2.cpp \
          ../epollobserver.cpp \
@@ -16,6 +17,7 @@ sslserver_SRC = sslepoll_t1.cpp \
 
 client_SRC = epoll_client.cpp
 clients_SRC = epoll_clients.cpp
+sslClient_SRC = ssl_client.cpp
 
 CC  = gcc
 CXX = g++
@@ -44,6 +46,9 @@ client: $(client_SRC:.cpp=.o)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clients: $(clients_SRC:.cpp=.o)
+	$(CXX) -o $@ $^ $(LDFLAGS)
+
+sslclient: $(sslClient_SRC:.cpp=.o)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
