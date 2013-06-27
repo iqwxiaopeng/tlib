@@ -1,4 +1,4 @@
-ALL = server1 server2 client clients  sslserver sslclient sslclients
+ALL = server1 server2 client clients  sslserver sslclient sslclients timer1
 
 
 server1_SRC = epoll_t1.cpp \
@@ -19,6 +19,10 @@ client_SRC = epoll_client.cpp
 clients_SRC = epoll_clients.cpp
 sslClient_SRC = ssl_client.cpp
 sslClients_SRC = ssl_clients.cpp
+timer1_SRC = timerepoll_t1.cpp \
+            ../epollobserver.cpp \
+            ../timerepoller.cpp \
+            ../csocket.cpp
 
 CC  = gcc
 CXX = g++
@@ -53,6 +57,9 @@ sslclient: $(sslClient_SRC:.cpp=.o)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 sslclients: $(sslClients_SRC:.cpp=.o)
+	$(CXX) -o $@ $^ $(LDFLAGS)
+
+timer1: $(timer1_SRC:.cpp=.o)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
