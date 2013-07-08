@@ -1,4 +1,5 @@
-ALL = server1 server2 client clients  sslserver sslclient sslclients timer1 sort
+ALL = server1 server2 client clients  sslserver sslclient sslclients timer1 sort \
+        log1
 
 
 server1_SRC = epoll_t1.cpp \
@@ -25,11 +26,13 @@ timer1_SRC = timerepoll_t1.cpp \
             ../csocket.cpp
 
 sort_SRC = sort_t.cpp
+log1_SRC = log_t1.cpp \
+           ../log.cpp
 
 CC  = gcc
 CXX = g++
-CFLAGS  = -g -fPIC -Wall -O2 -pipe -fno-ident -MMD -D_GNU_SOURCE -D_REENTRNT
-CXXFLAGS += -g -fPIC -Wall -O2 -pipe -fno-ident -D_REENTRNT -std=c++0x
+CFLAGS  = -g -fPIC -Wall  -pipe -fno-ident -MMD -D_GNU_SOURCE -D_REENTRNT
+CXXFLAGS += -g -fPIC -Wall  -pipe -fno-ident -D_REENTRNT -std=c++0x
 LDFLAGS = -lpthread -lssl
 
 .PHONY: all clean
@@ -65,6 +68,9 @@ timer1: $(timer1_SRC:.cpp=.o)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 sort: $(sort_SRC:.cpp=.o)
+	$(CXX) -o $@ $^ $(LDFLAGS)
+
+log1: $(log1_SRC:.cpp=.o)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
